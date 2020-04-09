@@ -1,3 +1,4 @@
+using GithubStatistics.WebAPI.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace GithubStatistics.WebAPI
                 // TODO: add swagger
             }
 
+            app.UseCustomExceptionHandler();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
