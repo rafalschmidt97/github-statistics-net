@@ -10,13 +10,13 @@ As a contributor, here are the guidelines I would like you to follow:
 * [Coding Rules](#rules)
 * [Commit Message Guidelines](#commit)
 
-## <a name="issue"></a> Found a Bug?
+## Found a Bug?
 
 If you find a bug in the source code, you can help us by
 [submitting an issue](#submit-issue) to the [Bitbucket Repository][github]. Even better, you can
 [submit a Pull Request](#submit-pr) with a fix.
 
-## <a name="feature"></a> Missing a Feature?
+## Missing a Feature?
 
 You can _request_ a new feature by [submitting an issue](#submit-issue) to the
 Repository. If you would like to _implement_ a new feature, please submit an issue with
@@ -29,14 +29,14 @@ Please consider what kind of change it is:
   issue name, please prefix your proposal with `[discussion]`, for example "[discussion]: your feature idea".
 * **Small Features** can be crafted and directly [submitted as a Pull Request](#submit-pr).
 
-## <a name="submit"></a> Submission Guidelines
+## Submission Guidelines
 
-### <a name="submit-issue"></a> Submitting an Issue
+### Submitting an Issue
 
 Before you submit an issue, please search the issue tracker, maybe an issue for your problem 
 already exists and the discussion might inform you of workarounds readily available.
 
-### <a name="submit-pr"></a> Submitting a Pull Request (PR)
+### Submitting a Pull Request (PR)
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
@@ -45,7 +45,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 1. Fork the repository.
 1. Make your changes in a new git branch:
 
-   ```shell
+   ```
    git checkout -b my-fix-branch master
    ```
 
@@ -56,7 +56,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
    [commit message conventions](#commit). Adherence to these conventions
    is necessary because release notes are automatically generated from these messages.
 
-   ```shell
+   ```
    git commit -a
    ```
 
@@ -64,7 +64,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 
 1. Push your branch to Bitbucket:
 
-   ```shell
+   ```
    git push origin my-fix-branch
    ```
 
@@ -76,17 +76,17 @@ Before you submit your Pull Request (PR) consider the following guidelines:
   * Re-run the test suites to ensure tests are still passing.
   * Rebase your branch to upstream and force push to your Bitbucket repository (this will update your Pull Request):
 
-    ```shell
-    git checkout master
-    git pull upstream master
-    git checkout your-feature-branch
-    git rebase upstream/master
-  
-    Once you have fixed conflicts
-  
-    git rebase --continue
-    git push -f
-    ```
+```
+git checkout master
+git pull upstream master
+git checkout your-feature-branch
+git rebase upstream/master
+
+Once you have fixed conflicts
+
+git rebase --continue
+git push -f
+```
 
 That's it! Thank you for your contribution!
 
@@ -97,29 +97,29 @@ from the main (upstream) repository:
 
 * Delete the remote branch on Bitbucket either through the Bitbucket web UI or your local shell as follows:
 
-  ```shell
+  ```
   git push origin --delete my-fix-branch
   ```
 
 * Check out the master branch:
 
-  ```shell
+  ```
   git checkout master -f
   ```
 
 * Delete the local branch:
 
-  ```shell
+  ```
   git branch -D my-fix-branch
   ```
 
 * Update your master with the latest upstream version:
 
-  ```shell
+  ```
   git pull upstream master
   ```
 
-## <a name="development"></a> Development Setup
+## Development Setup
 
 You will need .NET Core version 3.1+:
 
@@ -146,14 +146,14 @@ export ASPNETCORE_ENVIRONMENT=Development // bash
 $ docker docker build -t username/github-statistics-api . && docker push username/github-statistics-api
 ```
 
-## <a name="rules"></a> Coding Rules
+## Coding Rules
 
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
 * I follow [Microsoft's C# Style Guide](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/)
 by using StyleCop and FxCop across the projects.
 
-## <a name="commit"></a> Commit Message Guidelines
+## Commit Message Guidelines
 
 I have very precise rules over how mine git commit messages can be formatted. This leads to **more
 readable messages** that are easy to follow when looking through the **project history**.
