@@ -12,10 +12,12 @@ namespace GithubStatistics.WebAPI
     public class Startup
     {
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _environment;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             _configuration = configuration;
+            _environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -23,13 +25,18 @@ namespace GithubStatistics.WebAPI
             services.AddInfrastructure();
             services.AddApplication();
             services.AddControllers();
+
+            if (_environment.IsDevelopment())
+            {
+                services.AddOpenApi();
+            }
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_environment.IsDevelopment())
             {
-                // TODO: add swagger
+                app.UseOpenApi();
             }
 
             app.UseCustomExceptionHandler();
