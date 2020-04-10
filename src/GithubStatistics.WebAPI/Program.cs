@@ -1,5 +1,6 @@
+using GithubStatistics.WebAPI.Extensions;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 
 namespace GithubStatistics.WebAPI
 {
@@ -10,8 +11,9 @@ namespace GithubStatistics.WebAPI
             CreateHostBuilder(args).Build().Run();
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        private static IWebHostBuilder CreateHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseLogger()
+                .UseStartup<Startup>();
     }
 }
