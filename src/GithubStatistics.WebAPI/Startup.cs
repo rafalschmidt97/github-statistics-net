@@ -30,6 +30,8 @@ namespace GithubStatistics.WebAPI
             {
                 services.AddOpenApi();
             }
+
+            services.AddCustomExceptionHandler();
         }
 
         public void Configure(IApplicationBuilder app)

@@ -5,12 +5,18 @@ using System.Threading.Tasks;
 using GithubStatistics.Common.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace GithubStatistics.WebAPI.Extensions
 {
     public static class ExceptionExtension
     {
+        public static void AddCustomExceptionHandler(this IServiceCollection services)
+        {
+            services.AddTransient<CustomExceptionHandlerMiddleware>();
+        }
+
         public static IApplicationBuilder UseCustomExceptionHandler(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<CustomExceptionHandlerMiddleware>();
