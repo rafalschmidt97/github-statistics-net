@@ -2,11 +2,10 @@ This repository is a part of **Allegro** recruitment process.
 It includes the api for gathering information about user repositories.
 Created with .NET Core and ASP.NET Core.
 
-// TODO: Build status here
+CI configured with Bitbucket Pipeline (build + tests).
 
 ## Recruitment task
 
-Recruitment task
 Create a simple REST service which will return statistics of Github user repositories. Statistics should include:
 
 - Letters used in repository names, case insensitive (for example, ‘a’ was used 108 times, ‘b’ 30, ‘c’ 42 etc.)
