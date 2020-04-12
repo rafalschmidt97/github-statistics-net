@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -11,6 +14,9 @@ namespace GithubStatistics.WebAPI.Extensions
             services.AddSwaggerGen(configuration =>
             {
                 configuration.SwaggerDoc("v1", CreateOpenApiInfo());
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                configuration.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -27,7 +33,7 @@ namespace GithubStatistics.WebAPI.Extensions
         {
             var info = new OpenApiInfo
             {
-                Title = "GithubStatistics Open API",
+                Title = "GithubStatistics",
                 Description = "Recruitment task for Allegro",
             };
 
