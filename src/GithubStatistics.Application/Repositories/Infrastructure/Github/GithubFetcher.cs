@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GithubStatistics.Application.Repositories.Infrastructure.Github
 {
-    public class GithubFetcher : IGithubFetcher
+    public class GithubFetcher
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<GithubFetcher> _logger;

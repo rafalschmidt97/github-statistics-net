@@ -8,17 +8,17 @@ using Xunit;
 
 namespace GithubStatistics.WebAPI.IntegrationTest.Repositories
 {
-    public class RepositoriesTest : IClassFixture<WebApplicationFactory<Startup>>
+    public class GetStatisticsTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
 
-        public RepositoriesTest(WebApplicationFactory<Startup> factory)
+        public GetStatisticsTest(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
 
         [Fact]
-        public async Task GetRepositoriesShouldReturnData()
+        public async Task ShouldReturnData()
         {
             var client = _factory.CreateClient();
 
@@ -32,7 +32,7 @@ namespace GithubStatistics.WebAPI.IntegrationTest.Repositories
         }
 
         [Fact]
-        public async Task GetRepositoriesThrowNotFound()
+        public async Task ShouldThrowNotFound()
         {
             var client = _factory.CreateClient();
 
