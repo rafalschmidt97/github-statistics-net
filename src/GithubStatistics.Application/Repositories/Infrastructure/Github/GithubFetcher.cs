@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using GithubStatistics.Application.Repositories.Infrastructure.Github;
 using GithubStatistics.Common.Exceptions;
 using GraphQL;
 using GraphQL.Client.Http;
@@ -12,7 +11,7 @@ using GraphQL.Client.Serializer.Newtonsoft;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace GithubStatistics.Infrastructure.Repositories
+namespace GithubStatistics.Application.Repositories.Infrastructure.Github
 {
     public class GithubFetcher : IGithubFetcher
     {

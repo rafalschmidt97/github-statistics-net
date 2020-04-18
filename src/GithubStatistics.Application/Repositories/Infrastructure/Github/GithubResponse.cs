@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GithubStatistics.Infrastructure.Repositories
+namespace GithubStatistics.Application.Repositories.Infrastructure.Github
 {
     public class GithubResponse
     {

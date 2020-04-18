@@ -21,6 +21,5 @@
 
     <ItemGroup>
         <ProjectReference Include="..\GithubStatistics.Application\GithubStatistics.Application.csproj" />
-        <ProjectReference Include="..\GithubStatistics.Infrastructure\GithubStatistics.Infrastructure.csproj" />
     </ItemGroup>
 </Project>

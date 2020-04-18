@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using GithubStatistics.Application.Repositories.Infrastructure.Github;
 
-namespace GithubStatistics.Infrastructure.Repositories
+namespace GithubStatistics.Application.Repositories.Infrastructure.Github
 {
     public static class GithubMapper
     {
