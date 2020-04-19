@@ -12,6 +12,13 @@ namespace GithubStatistics.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<GithubFetcher>();
             services.AddHttpClient();
+
+            services.Scan(scan =>
+                scan.FromAssemblies(Assembly.GetExecutingAssembly())
+                    .AddClasses()
+                    .AsMatchingInterface()
+                    .WithTransientLifetime());
+
             return services;
         }
     }

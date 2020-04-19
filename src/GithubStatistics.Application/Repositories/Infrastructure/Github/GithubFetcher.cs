@@ -1,28 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GithubStatistics.Common.Exceptions;
 using GraphQL;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.Newtonsoft;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace GithubStatistics.Application.Repositories.Infrastructure.Github
 {
     public class GithubFetcher
     {
-        private readonly IConfiguration _configuration;
-        private readonly IHttpClientFactory _clientFactory;
+        private readonly IGithubClient _githubClient;
         private readonly ILogger<GithubFetcher> _logger;
 
-        public GithubFetcher(IConfiguration configuration, IHttpClientFactory clientFactory, ILogger<GithubFetcher> logger)
+        public GithubFetcher(IGithubClient githubClient, ILogger<GithubFetcher> logger)
         {
-            _configuration = configuration;
-            _clientFactory = clientFactory;
+            _githubClient = githubClient;
             _logger = logger;
         }
 
@@ -70,7 +63,7 @@ namespace GithubStatistics.Application.Repositories.Infrastructure.Github
             while (true)
             {
                 request.Variables = new { owner, after };
-                var response = await SendQuery(request);
+                var response = await _githubClient.SendQuery<GithubResponse>(request);
                 CheckErrors(owner, response);
 
                 if (repositories == null)
@@ -103,38 +96,6 @@ namespace GithubStatistics.Application.Repositories.Infrastructure.Github
             return repositories;
         }
 
-        private async Task<GraphQLResponse<GithubResponse>> SendQuery(GraphQLRequest request)
-        {
-            GraphQLResponse<GithubResponse> response;
-            try
-            {
-                var githubClient = PrepareGithubClient();
-                response = await githubClient.SendQueryAsync<GithubResponse>(request);
-            }
-            catch (GraphQLHttpException exception)
-            {
-                _logger.LogCritical($"Github GraphQL API Error: {exception.HttpResponseMessage.ReasonPhrase}");
-                throw new InternalException("Unexpected error occurred while resolving the data from GitHub");
-            }
-
-            return response;
-        }
-
-        private GraphQLHttpClient PrepareGithubClient()
-        {
-            var options = new GraphQLHttpClientOptions
-            {
-                EndPoint = new Uri(_configuration["GITHUB_API_GRAPHQL_URL"]),
-            };
-
-            var httpClient = _clientFactory.CreateClient();
-            httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", _configuration["GITHUB_AUTH_TOKEN"]);
-            httpClient.DefaultRequestHeaders.Add("User-Agent", "GithubStatistics");
-
-            return new GraphQLHttpClient(options, new NewtonsoftJsonSerializer(), httpClient);
-        }
-
         private void CheckErrors(string owner, GraphQLResponse<GithubResponse> response)
         {
             if (response.Errors != null && response.Errors.Any())
@@ -144,8 +105,8 @@ namespace GithubStatistics.Application.Repositories.Infrastructure.Github
                     throw new NotFoundException($"User '{owner}' not found");
                 }
 
-                _logger.LogCritical($"Github GraphQL API Error: {response.Errors[0].Message}");
-                throw new InternalException("Unexpected error occurred while resolving the data from GitHub");
+                _logger.LogCritical($"Unexpected fetching user repositories error: {response.Errors[0].Message}");
+                throw new InternalException("Unexpected fetching user repositories error");
             }
         }
     }
