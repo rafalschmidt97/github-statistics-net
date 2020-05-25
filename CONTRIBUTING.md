@@ -68,7 +68,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
    git push origin my-fix-branch
    ```
 
-1. In Bitbucket, send a pull request to `github-statistics-api:master`.
+1. In Bitbucket, send a pull request to `github-statistics-net:master`.
 
 * If someone suggest changes then:
 
@@ -143,7 +143,7 @@ $Env:ASPNETCORE_ENVIRONMENT = "Development" // powershell
 export ASPNETCORE_ENVIRONMENT=Development // bash
 
 # publish new image to docker hub
-$ docker docker build -t username/github-statistics-api . && docker push username/github-statistics-api
+$ docker docker build -t username/github-statistics-net . && docker push username/github-statistics-net
 ```
 
 ## Coding Rules
@@ -201,4 +201,4 @@ The subject contains succinct description of the change:
 
 If necessary, the body should include the motivation for the change and contrast this with previous behavior.
 
-[github]: https://bitbucket.org/rafalschmidt97/github-statistics-api
+[github]: https://bitbucket.org/rafalschmidt97/github-statistics-net
